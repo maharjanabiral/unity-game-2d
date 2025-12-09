@@ -11,4 +11,7 @@ internal class AnimatorStrings
     internal static string canMove = "canMove";
     internal static string hasTarget = "hasTarget";
     internal static string isAlive = "isAlive";
+    internal static string isPlayerClose = "isPlayerClose";
+    internal static string isPatrolling = "isPatrolling";
+
 }
