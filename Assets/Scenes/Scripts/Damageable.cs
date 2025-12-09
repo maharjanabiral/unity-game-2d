@@ -4,6 +4,7 @@ using UnityEngine.Events;
 public class Damageable: MonoBehaviour
 {
     private Animator _animator;
+    public HealthBar healthBar;
     private int _maxHealth = 100;
     public UnityEvent<int, Vector2> damageableHit;
     
@@ -18,6 +19,7 @@ public class Damageable: MonoBehaviour
         private set
         {
             _maxHealth = value;
+            
         }
     }
 
@@ -61,6 +63,12 @@ public class Damageable: MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        healthBar.SetMaxHealth(MaxHealth);
+        healthBar.SetHealth(Health);
+    }
+
     void Update() {
         if (isInvincible)
         {
@@ -80,6 +88,8 @@ public class Damageable: MonoBehaviour
         if(IsAlive && !isInvincible)
         {
             Health -= damage;
+            healthBar.SetHealth(Health);
+
             isInvincible = true;
             damageableHit?.Invoke(damage, knockback);
             CharacterEvents.characterDamaged.Invoke(gameObject, damage);
