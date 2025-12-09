@@ -40,7 +40,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5964708396883730948}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -107,9 +107,10 @@ GameObject:
   - component: {fileID: 4130373814326184970}
   - component: {fileID: 3537592574682498996}
   - component: {fileID: 1094753681551907292}
-  - component: {fileID: 4910023319283939159}
+  - component: {fileID: 6093414446077952046}
+  - component: {fileID: 5601592940564288217}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: LightBandit_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -290,8 +291,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Knight
   attackZone: {fileID: 7879856543920892245}
   moveSpeed: 5
-  distance: 5
-  attackRange: 2
   damageAmount: 10
 --- !u!114 &1094753681551907292
 MonoBehaviour:
@@ -320,7 +319,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   _isGrounded: 1
---- !u!114 &4910023319283939159
+--- !u!114 &6093414446077952046
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -332,12 +331,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ba17f66a377824bbd15a6d2e210086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Damageable
-  damageableHit:
-    m_PersistentCalls:
-      m_Calls: []
   isInvincible: 0
-  _health: 100
   invincibilityTime: 0.2
+--- !u!114 &5601592940564288217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535909526909558427}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7803a6143662f9b448839130b0c7e96f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Attack
+  damageAmount: 10
 --- !u!1 &8320714487237738836
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +356,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2303324588377147415}
   - component: {fileID: 8391921242944159966}
-  - component: {fileID: 5831386609703760807}
   m_Layer: 10
   m_Name: Trace
   m_TagString: Untagged
@@ -378,7 +385,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8320714487237738836}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -417,26 +424,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.2278558, y: 1.19049}
-      - {x: 0.12935871, y: 1.4597268}
+    - - {x: -0.22347897, y: 1.3805182}
       - {x: -0.6906977, y: 1.1470121}
       - {x: -0.73122644, y: 0.83831775}
-      - {x: -0.46082482, y: 0.62307465}
-      - {x: -0.27507198, y: 0.62459075}
-      - {x: -0.5726703, y: 0.9580384}
-      - {x: -0.5047436, y: 1.0880339}
+      - {x: -0.47522646, y: 0.551067}
+      - {x: 0.12817109, y: 0.5885871}
+      - {x: -0.28151968, y: 1.2392501}
   m_UseDelaunayMesh: 0
---- !u!114 &5831386609703760807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8320714487237738836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7803a6143662f9b448839130b0c7e96f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Attack
-  damageAmount: 10
-  knockback: {x: 0, y: 0}

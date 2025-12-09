@@ -1,11 +1,9 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Damageable: MonoBehaviour
 {
     private Animator _animator;
     private int _maxHealth = 100;
-    public UnityEvent<int, Vector2> damageableHit;
     
     [SerializeField]
     private bool isInvincible = false;
@@ -21,7 +19,6 @@ public class Damageable: MonoBehaviour
         }
     }
 
-    [SerializeField]
     private int _health = 100;
     public int Health
     {
@@ -32,10 +29,6 @@ public class Damageable: MonoBehaviour
         private set
         {
             _health = value;
-            if(_health <= 0)
-            {
-                IsAlive = false;
-            }
         }
     }
 
@@ -53,6 +46,7 @@ public class Damageable: MonoBehaviour
         {
             _isAlive = value;
             _animator.SetBool(AnimatorStrings.isAlive, value);
+            Debug.Log("Is Alive:" + value);
         }
     }
 
@@ -75,27 +69,17 @@ public class Damageable: MonoBehaviour
     }
 
 
-    public bool Hit(int damage, Vector2 knockback)
+    public void Hit(int damage)
     {
         if(IsAlive && !isInvincible)
         {
             Health -= damage;
-            isInvincible = true;
-            damageableHit?.Invoke(damage, knockback);
-            CharacterEvents.characterDamaged.Invoke(gameObject, damage);
-            return true;
-        }
-        return false;
-    }
-
-    public void Heal(int healthRestored)
-    {
-        if (IsAlive)
-        {
-            int maxHeal = Mathf.Max(MaxHealth - Health, 0);
-            int actualHeal = Mathf.Min(maxHeal, healthRestored);
-            Health += actualHeal;
-            CharacterEvents.characterHealed.Invoke(gameObject, actualHeal);
+            if (Health <= 0)
+            {
+                Health = 0;
+                IsAlive = false;
+            }
+            isInvincible = true;    
         }
     }
 
