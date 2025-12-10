@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -82,7 +81,6 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeField] float speed = 5f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -190,9 +188,6 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    public void TakeDamage(int Damage)
-    {
-        
-    }
+  
 
 }
