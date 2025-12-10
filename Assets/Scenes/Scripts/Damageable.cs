@@ -1,15 +1,20 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Damageable: MonoBehaviour
 {
     private Animator _animator;
-    public HealthBar healthBar;
+    [SerializeField]
+    private HealthBar healthBar;
+    [SerializeField]
+    private UIManager uiManager;
     private int _maxHealth = 100;
     public UnityEvent<int, Vector2> damageableHit;
     
     [SerializeField]
     private bool isInvincible = false;
+    private CinemachineImpulseSource source;
     public int MaxHealth
     {
         get
@@ -37,6 +42,8 @@ public class Damageable: MonoBehaviour
             if(_health <= 0)
             {
                 IsAlive = false;
+                if (uiManager != null)
+                    uiManager.GameOver();
             }
         }
     }
@@ -65,8 +72,12 @@ public class Damageable: MonoBehaviour
 
     private void Start()
     {
-        healthBar.SetMaxHealth(MaxHealth);
-        healthBar.SetHealth(Health);
+        source = GetComponentInParent<CinemachineImpulseSource>();
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHealth(MaxHealth);
+            healthBar.SetHealth(Health);
+        }
     }
 
     void Update() {
@@ -88,11 +99,16 @@ public class Damageable: MonoBehaviour
         if(IsAlive && !isInvincible)
         {
             Health -= damage;
-            healthBar.SetHealth(Health);
+            if (healthBar != null)
+                healthBar.SetHealth(Health);
 
             isInvincible = true;
             damageableHit?.Invoke(damage, knockback);
             CharacterEvents.characterDamaged.Invoke(gameObject, damage);
+            Debug.Log("Source = " + source);
+            Debug.Log("CameraShakeManager.instance = " + CameraShakeManager.instance);
+
+            CameraShakeManager.instance.CameraShake(source);
             return true;
         }
         return false;
@@ -106,6 +122,8 @@ public class Damageable: MonoBehaviour
             int actualHeal = Mathf.Min(maxHeal, healthRestored);
             Health += actualHeal;
             CharacterEvents.characterHealed.Invoke(gameObject, actualHeal);
+            if (healthBar != null)
+                healthBar.SetHealth(Health);
         }
     }
 

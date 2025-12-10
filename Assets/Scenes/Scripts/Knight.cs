@@ -11,7 +11,6 @@ public class Knight : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float distance = 5f;
     [SerializeField] private float attackRange = 2f;
-    [SerializeField] private float damageAmount = 10f;
 
     private GameObject _player;
     private bool _hasTarget = false;
